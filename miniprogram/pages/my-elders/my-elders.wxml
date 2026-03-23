@@ -1,0 +1,72 @@
+<!-- pages/my-elders/my-elders.wxml - 我的老人列表 -->
+<view class="page-container">
+
+  <!-- 顶部统计 -->
+  <view class="list-header">
+    <view class="list-header-content">
+      <text class="list-title">我登记的老人</text>
+      <text class="list-count">共 {{list.length}} 位</text>
+    </view>
+    <view class="add-btn" bindtap="onAddElder">
+      <text class="add-btn-icon">＋</text>
+      <text class="add-btn-text">添加</text>
+    </view>
+  </view>
+
+  <!-- 老人列表 -->
+  <view class="page-content">
+
+    <!-- 空状态 -->
+    <view wx:if="{{!loading && list.length === 0}}" class="empty-state">
+      <text class="empty-icon">👴</text>
+      <text class="empty-text">还没有登记老人信息</text>
+      <text class="empty-hint">添加老人资料，守护家人安全</text>
+      <button class="btn btn-primary empty-add-btn" bindtap="onAddElder">
+        立即添加
+      </button>
+    </view>
+
+    <!-- 老人列表 -->
+    <view wx:for="{{list}}" wx:key="id" class="elder-card card" bindtap="onElderTap" data-id="{{item.id}}">
+
+      <!-- 虚拟头像 -->
+      <view class="elder-photo-wrap">
+        <view class="elder-photo-default">
+          <text>{{item.emojiAvatar}}</text>
+        </view>
+        <!-- 人脸识别状态 -->
+        <view class="face-badge {{item.photoCount > 0 ? 'face-badge-ok' : 'face-badge-no'}}">
+          <text>{{item.photoCount > 0 ? '✓' : '!'}} </text>
+        </view>
+      </view>
+
+      <!-- 基本信息 -->
+      <view class="elder-info">
+        <view class="elder-name-row">
+          <text class="elder-name">{{item.name}}</text>
+          <text class="elder-gender-age">{{item.gender}} · {{item.age || '?'}}岁</text>
+        </view>
+        <view class="elder-address-row">
+          <text class="elder-addr-icon">📍</text>
+          <text class="elder-address">{{item.address}}</text>
+        </view>
+        <view class="elder-phone-row">
+          <text class="elder-phone-icon">📞</text>
+          <text class="elder-phone">{{item.contactPhone}}</text>
+        </view>
+        <view wx:if="{{item.photoCount === 0}}" class="no-face-tip">
+          <text>⚠️ 未上传照片，无法人脸识别</text>
+        </view>
+      </view>
+
+      <!-- 右箭头 -->
+      <text class="elder-arrow">›</text>
+    </view>
+
+    <!-- 加载中 -->
+    <view wx:if="{{loading}}" class="loading-row">
+      <text>加载中...</text>
+    </view>
+
+  </view>
+</view>

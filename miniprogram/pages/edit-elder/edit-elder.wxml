@@ -1,0 +1,125 @@
+<!-- pages/edit-elder/edit-elder.wxml - 编辑老人信息（仅允许修改基本信息，照片不可更改）-->
+<view class="page-container">
+  <view class="page-content">
+
+    <!-- 照片展示区（只读，不可修改） -->
+    <view class="card photo-card" wx:if="{{form.photoUrl}}">
+      <view class="card-title-row">
+        <text class="card-title">老人照片</text>
+        <text class="photo-lock-tip">🔒 照片不可修改</text>
+      </view>
+      <view class="photo-preview-wrap" bindtap="onPreviewPhoto">
+        <image src="{{form.photoUrl}}" class="photo-preview" mode="aspectFill" />
+        <view class="photo-count-bar">已注册 {{form.photoCount}}/5 张人脸照片</view>
+      </view>
+    </view>
+
+    <!-- 无照片提示（photoCount = 0） -->
+    <view class="card photo-card" wx:elif="{{form.photoCount === 0}}">
+      <text class="card-title">老人照片</text>
+      <view class="no-photo-tip">
+        <text class="no-photo-icon">📷</text>
+        <text>暂未上传照片</text>
+        <text class="no-photo-sub">照片须在创建时上传，创建后不可修改</text>
+      </view>
+    </view>
+
+    <!-- 基本信息 -->
+    <view class="card">
+      <text class="card-title">基本信息</text>
+
+      <view class="form-group">
+        <view class="form-label"><text>老人姓名</text><text class="required">*</text></view>
+        <input class="form-input" placeholder="请输入老人姓名" value="{{form.name}}"
+          bindinput="onInput" data-field="name" maxlength="20" />
+      </view>
+
+      <view class="form-group">
+        <view class="form-label"><text>性别</text><text class="required">*</text></view>
+        <view class="gender-group">
+          <view class="gender-btn {{form.gender === '男' ? 'gender-selected' : ''}}"
+            bindtap="onGenderSelect" data-gender="男">👴 男</view>
+          <view class="gender-btn {{form.gender === '女' ? 'gender-selected' : ''}}"
+            bindtap="onGenderSelect" data-gender="女">👵 女</view>
+        </view>
+      </view>
+
+      <view class="form-group">
+        <view class="form-label"><text>年龄</text></view>
+        <input class="form-input" type="number" placeholder="请输入年龄" value="{{form.age}}"
+          bindinput="onInput" data-field="age" maxlength="3" />
+      </view>
+    </view>
+
+    <!-- 居住信息 -->
+    <view class="card">
+      <text class="card-title">居住信息</text>
+
+      <view class="form-group">
+        <view class="form-label"><text>家庭住址</text><text class="required">*</text></view>
+        <textarea class="form-textarea" placeholder="请输入详细家庭地址"
+          value="{{form.address}}" bindinput="onInput" data-field="address"
+          maxlength="200" auto-height />
+      </view>
+
+      <view class="form-group">
+        <view class="form-label"><text>外貌特征</text></view>
+        <input class="form-input" placeholder="如：身高约165cm，常穿深色外套"
+          value="{{form.features}}" bindinput="onInput" data-field="features" maxlength="100" />
+      </view>
+    </view>
+
+    <!-- 紧急联系 -->
+    <view class="card">
+      <text class="card-title">紧急联系方式</text>
+
+      <view class="form-group">
+        <view class="form-label"><text>紧急联系电话</text><text class="required">*</text></view>
+        <input class="form-input" type="number" placeholder="请输入家属手机号"
+          value="{{form.contactPhone}}" bindinput="onInput" data-field="contactPhone" maxlength="11" />
+      </view>
+
+      <view class="form-group">
+        <view class="form-label"><text>联系人姓名</text></view>
+        <input class="form-input" placeholder="如：张三（老人儿子）"
+          value="{{form.contactName}}" bindinput="onInput" data-field="contactName" maxlength="20" />
+      </view>
+
+      <view class="form-group">
+        <view class="form-label"><text>与老人关系</text></view>
+        <view class="relation-wrap">
+          <view wx:for="{{relations}}" wx:key="*this"
+            class="relation-tag {{form.relation === item ? 'relation-selected' : ''}}"
+            bindtap="onRelationSelect" data-relation="{{item}}">{{item}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 健康状况 -->
+    <view class="card">
+      <text class="card-title">健康状况（选填）</text>
+      <view class="form-group">
+        <view class="form-label"><text>病史/健康状况</text></view>
+        <textarea class="form-textarea" placeholder="如：患有老年痴呆症..."
+          value="{{form.medicalHistory}}" bindinput="onInput" data-field="medicalHistory"
+          maxlength="500" auto-height />
+      </view>
+      <view class="form-group">
+        <view class="form-label"><text>其他备注</text></view>
+        <textarea class="form-textarea" placeholder="其他需要说明的信息..."
+          value="{{form.additionalInfo}}" bindinput="onInput" data-field="additionalInfo"
+          maxlength="300" auto-height />
+      </view>
+    </view>
+
+    <button class="btn btn-primary btn-block submit-btn"
+      bindtap="onSubmit" loading="{{submitting}}"
+      disabled="{{submitting}}">
+      {{submitting ? '保存中...' : '保存修改'}}
+    </button>
+
+    <view class="edit-tip">
+      <text>💡 如需更新照片请删除后重新创建老人信息</text>
+    </view>
+  </view>
+</view>

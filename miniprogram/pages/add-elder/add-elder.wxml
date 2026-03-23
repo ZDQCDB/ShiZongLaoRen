@@ -1,0 +1,239 @@
+<!-- pages/add-elder/add-elder.wxml - 添加老人信息页 -->
+<view class="page-container">
+  <view class="page-content">
+
+    <!-- ① 照片上传区域（最多5张，上传后不可修改） -->
+    <view class="card photo-card">
+      <view class="card-title-row">
+        <text class="card-title">人脸照片</text>
+        <text class="photo-count-tip">{{selectedPhotos.length}}/{{5}}张</text>
+      </view>
+      <text class="photo-hint">建议上传1~5张清晰单人正面照，多角度照片识别更准确，照片提交后不可修改，请务必上传小于2MB的图片！</text>
+
+      <!-- 照片网格 -->
+      <view class="photo-grid">
+        <!-- 已选照片 -->
+        <view
+          wx:for="{{selectedPhotos}}"
+          wx:key="index"
+          class="photo-item"
+        >
+          <image
+            src="{{item}}"
+            class="photo-thumb"
+            mode="aspectFill"
+            bindtap="onPreviewPhoto"
+            data-index="{{index}}"
+          />
+          <!-- 删除按钮（仅未提交前可删） -->
+          <view class="photo-remove" catchtap="onRemovePhoto" data-index="{{index}}">✕</view>
+          <view wx:if="{{index === 0}}" class="photo-badge">封面</view>
+        </view>
+
+        <!-- 添加按钮（未达上限时显示） -->
+        <view
+          wx:if="{{selectedPhotos.length < 5}}"
+          class="photo-add"
+          bindtap="onAddPhoto"
+        >
+          <text class="photo-add-icon">+</text>
+          <text class="photo-add-text">添加照片</text>
+        </view>
+      </view>
+
+      <!-- 上传进度 -->
+      <view wx:if="{{uploadingPhotos || uploadProgress}}" class="upload-progress">
+        <text class="progress-loading">⏳</text>
+        <text>{{uploadProgress || '照片上传中...'}}</text>
+      </view>
+    </view>
+
+    <!-- ② 基本信息 -->
+    <view class="card">
+      <text class="card-title">基本信息</text>
+
+      <view class="form-group">
+        <view class="form-label">
+          <text>老人姓名</text>
+          <text class="required">*</text>
+        </view>
+        <input
+          class="form-input"
+          placeholder="请输入老人真实姓名"
+          value="{{form.name}}"
+          bindinput="onInput"
+          data-field="name"
+          maxlength="20"
+        />
+      </view>
+
+      <view class="form-group">
+        <view class="form-label">
+          <text>性别</text>
+          <text class="required">*</text>
+        </view>
+        <view class="gender-group">
+          <view
+            class="gender-btn {{form.gender === '男' ? 'gender-selected' : ''}}"
+            bindtap="onGenderSelect"
+            data-gender="男"
+          >👴 男</view>
+          <view
+            class="gender-btn {{form.gender === '女' ? 'gender-selected' : ''}}"
+            bindtap="onGenderSelect"
+            data-gender="女"
+          >👵 女</view>
+        </view>
+      </view>
+
+      <view class="form-group">
+        <view class="form-label"><text>年龄</text></view>
+        <input
+          class="form-input"
+          type="number"
+          placeholder="请输入年龄"
+          value="{{form.age}}"
+          bindinput="onInput"
+          data-field="age"
+          maxlength="3"
+        />
+      </view>
+
+      <view class="form-group">
+        <view class="form-label"><text>身份证号</text></view>
+        <input
+          class="form-input"
+          placeholder="选填，加密保存"
+          value="{{form.idCard}}"
+          bindinput="onInput"
+          data-field="idCard"
+          maxlength="18"
+        />
+      </view>
+    </view>
+
+    <!-- ③ 居住信息 -->
+    <view class="card">
+      <text class="card-title">居住信息</text>
+
+      <view class="form-group">
+        <view class="form-label">
+          <text>家庭住址</text>
+          <text class="required">*</text>
+        </view>
+        <textarea
+          class="form-textarea"
+          placeholder="请输入老人常住地址（详细地址有助于快速送回）"
+          value="{{form.address}}"
+          bindinput="onInput"
+          data-field="address"
+          maxlength="200"
+          auto-height
+        />
+      </view>
+
+      <view class="form-group">
+        <view class="form-label"><text>外貌特征</text></view>
+        <input
+          class="form-input"
+          placeholder="如：身高约165cm，经常穿深色外套"
+          value="{{form.features}}"
+          bindinput="onInput"
+          data-field="features"
+          maxlength="100"
+        />
+      </view>
+    </view>
+
+    <!-- ④ 紧急联系信息 -->
+    <view class="card">
+      <text class="card-title">紧急联系方式</text>
+
+      <view class="form-group">
+        <view class="form-label">
+          <text>紧急联系电话</text>
+          <text class="required">*</text>
+        </view>
+        <input
+          class="form-input"
+          type="number"
+          placeholder="请输入家属手机号"
+          value="{{form.contactPhone}}"
+          bindinput="onInput"
+          data-field="contactPhone"
+          maxlength="11"
+        />
+      </view>
+
+      <view class="form-group">
+        <view class="form-label"><text>联系人姓名</text></view>
+        <input
+          class="form-input"
+          placeholder="如：张三"
+          value="{{form.contactName}}"
+          bindinput="onInput"
+          data-field="contactName"
+          maxlength="20"
+        />
+      </view>
+
+      <view class="form-group">
+        <view class="form-label"><text>与老人关系</text></view>
+        <view class="relation-wrap">
+          <view
+            wx:for="{{relations}}"
+            wx:key="*this"
+            class="relation-tag {{form.relation === item ? 'relation-selected' : ''}}"
+            bindtap="onRelationSelect"
+            data-relation="{{item}}"
+          >{{item}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- ⑤ 健康状况 -->
+    <view class="card">
+      <text class="card-title">健康状况（选填）</text>
+
+      <view class="form-group">
+        <view class="form-label"><text>病史/健康状况</text></view>
+        <textarea
+          class="form-textarea"
+          placeholder="如：患有老年痴呆症、糖尿病，用药情况..."
+          value="{{form.medicalHistory}}"
+          bindinput="onInput"
+          data-field="medicalHistory"
+          maxlength="500"
+          auto-height
+        />
+      </view>
+
+      <view class="form-group">
+        <view class="form-label"><text>其他备注</text></view>
+        <textarea
+          class="form-textarea"
+          placeholder="其他需要说明的信息..."
+          value="{{form.additionalInfo}}"
+          bindinput="onInput"
+          data-field="additionalInfo"
+          maxlength="300"
+          auto-height
+        />
+      </view>
+    </view>
+
+    <!-- 提交按钮 -->
+    <button
+      class="btn btn-primary btn-block submit-btn"
+      bindtap="onSubmit"
+      loading="{{submitting}}"
+      disabled="{{submitting || uploadingPhotos}}"
+    >
+      {{submitting ? (uploadProgress || '保存中...') : '保存老人信息'}}
+    </button>
+
+    <view class="bottom-note">
+      <text>🔒 老人信息受严格保护，照片仅用于寻找走失老人</text>
+    </view>
+  </view>
+</view>

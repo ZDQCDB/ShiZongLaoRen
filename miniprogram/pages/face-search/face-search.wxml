@@ -1,0 +1,147 @@
+<!-- pages/face-search/face-search.wxml - 人脸识别搜索页 -->
+<view class="page-container">
+
+  <!-- 顶部说明区域 -->
+  <view class="search-header">
+    <text class="header-icon">🔍</text>
+    <text class="header-title">人脸识别寻人</text>
+    <text class="header-desc">拍摄走失老人的照片\n系统将自动匹配并显示联系方式</text>
+  </view>
+
+  <view class="page-content">
+
+    <!-- 照片上传区域 -->
+    <view class="upload-card card">
+      <text class="card-title">拍摄老人照片</text>
+
+      <!-- 未拍照时显示拍照区域 -->
+      <view wx:if="{{!photoPath}}" class="upload-area" bindtap="onChoosePhoto">
+        <text class="upload-icon">📷</text>
+        <text class="upload-text">点击拍照</text>
+        <text class="upload-hint">请对准老人面部，拍摄清晰正面照</text>
+      </view>
+
+      <!-- 已拍照时显示预览 -->
+      <view wx:else class="preview-area">
+        <image src="{{photoPath}}" class="preview-img" mode="aspectFit" />
+        <view class="preview-actions">
+          <view class="preview-btn preview-btn-change" bindtap="onChoosePhoto">
+            <text>重新拍照</text>
+          </view>
+          <view class="preview-btn preview-btn-clear" bindtap="onClearPhoto">
+            <text>清除</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 识别按钮 -->
+    <button
+      class="btn btn-primary btn-block search-btn"
+      bindtap="onStartSearch"
+      disabled="{{!photoPath || searching}}"
+      loading="{{searching}}"
+    >
+      {{searching ? '识别中...' : '开始人脸识别'}}
+    </button>
+
+    <!-- 识别结果 - 成功找到 -->
+    <view wx:if="{{result && result.found}}" class="result-card result-success card">
+      <view class="result-header">
+        <text class="result-icon">✅</text>
+        <view class="result-title-wrap">
+          <text class="result-title">识别成功！</text>
+        </view>
+      </view>
+
+      <view class="elder-result-info">
+        <view class="result-photo-placeholder">
+          <text class="result-photo-icon">{{result.elderly.emojiAvatar}}</text>
+        </view>
+        <view class="result-details">
+          <text class="result-name">{{result.elderly.name}}</text>
+          <text class="result-gender-age">{{result.elderly.gender}} · {{result.elderly.age || '未知'}}岁</text>
+          <text class="result-address">📍 {{result.elderly.address}}</text>
+        </view>
+      </view>
+
+      <view class="result-contact">
+        <view class="contact-item">
+          <text class="contact-label">紧急联系人</text>
+          <text class="contact-value">{{result.elderly.contactName || '未填写'}}（{{result.elderly.relation || '家属'}}）</text>
+        </view>
+        <view class="contact-item">
+          <text class="contact-label">联系电话</text>
+          <text class="contact-phone">{{result.elderly.contactPhone}}</text>
+        </view>
+      </view>
+
+      <!-- 立即拨打 -->
+      <button
+        class="btn btn-primary btn-block call-btn"
+        bindtap="onCallPhone"
+      >
+        📞 立即拨打家属电话
+      </button>
+
+      <!-- 查看完整信息 -->
+      <button
+        class="btn btn-secondary btn-block detail-btn"
+        bindtap="onViewDetail"
+      >
+        查看完整信息
+      </button>
+    </view>
+
+    <!-- 识别结果 - 未找到 -->
+    <view wx:if="{{result && !result.found}}" class="result-card result-fail card">
+      <view class="result-header">
+        <text class="result-icon">❌</text>
+        <view class="result-title-wrap">
+          <text class="result-title">未能识别</text>
+        </view>
+      </view>
+
+      <text class="result-message">{{result.message}}</text>
+
+      <view class="suggest-list">
+        <text class="suggest-title">建议措施：</text>
+        <text class="suggest-item">• 尝试更换一张更清晰的正面照</text>
+        <text class="suggest-item">• 确保照片中老人面部完整、光线充足</text>
+        <text class="suggest-item">• 如老人信息尚未登记，请联系派出所协助</text>
+        <text class="suggest-item">• 拨打110报警求助</text>
+      </view>
+
+      <!-- 报警按钮 -->
+      <button
+        class="btn btn-danger btn-block call-police-btn"
+        open-type="makePhoneCall"
+        phone-number="110"
+      >
+        🚔 拨打110报警
+      </button>
+    </view>
+
+    <!-- 使用提示 -->
+    <view wx:if="{{!result}}" class="tips-section card">
+      <text class="card-title">识别须知</text>
+      <view class="tip-row">
+        <text class="tip-icon">💡</text>
+        <text class="tip-content">请确保照片清晰，面部无遮挡</text>
+      </view>
+      <view class="tip-row">
+        <text class="tip-icon">🔒</text>
+        <text class="tip-content">上传图片仅用于识别，不会永久保存</text>
+      </view>
+      <view class="tip-row">
+        <text class="tip-icon">✨</text>
+        <text class="tip-content">支持不同角度、光线条件下的照片</text>
+      </view>
+      <view class="tip-row">
+        <text class="tip-icon">📱</text>
+        <text class="tip-content">拍照后系统自动识别，快速找到家属</text>
+      </view>
+    </view>
+
+  </view>
+</view>

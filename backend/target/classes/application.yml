@@ -1,0 +1,82 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: shizong-laoren
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/shizong_laoren?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:790128mmmm}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          time_zone: Asia/Shanghai
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 60MB   # 最多5张，每张10MB
+
+# 日志配置
+logging:
+  level:
+    com.shizonglaoren: INFO
+    org.springframework.web: WARN
+  file:
+    name: logs/shizong-laoren.log
+
+# =============================================
+# 微信小程序配置（替换为你的真实配置）
+# =============================================
+wechat:
+  app-id: ${WECHAT_APP_ID:wx81abeea024268fb7}
+  app-secret: ${WECHAT_APP_SECRET:5d096f6dfd757dd708816e3166f12c43}
+  code2session-url: https://api.weixin.qq.com/sns/jscode2session
+
+# =============================================
+# JWT配置
+# =============================================
+jwt:
+  secret: ${JWT_SECRET:ShiZongLaoRenSecretKey2024XYZ!@#ABCDEabcde}  # 至少32位
+  expiration: 604800  # 7天（单位：秒）
+
+# =============================================
+# 阿里云配置
+# =============================================
+aliyun:
+  access-key-id: ${ALIYUN_ACCESS_KEY_ID:LTAI5tNzPYZCGCBUjiYLH7Ko}
+  access-key-secret: ${ALIYUN_ACCESS_KEY_SECRET:MHB56uaRcwOGab2tYtHkKRWTtUa1rW}
+  region-id: cn-shanghai
+
+  # 阿里云人脸识别 FaceBody（照片转换为特征向量存入人脸库，不使用OSS）
+  face:
+    endpoint: facebody.cn-shanghai.aliyuncs.com
+    db-name: ${ALIYUN_FACE_DB:ShiZongLaoRen}       # 人脸库名称（需在阿里云控制台提前创建）
+    confidence-threshold: 0.7                       # 置信度阈值（60分以上视为匹配）
+    max-photos-per-elderly: 5                        # 每位老人最多注册的照片张数
+
+# =============================================
+# 本地照片存储配置
+# 第一张照片保存至服务器本地，用于前端展示
+# =============================================
+file:
+  elderly-photo-dir: ${FILE_ELDERLY_PHOTO_DIR:/data/ShiZongLaoRen}   # 老人第一张照片存储目录
+  server-base-url: ${SERVER_BASE_URL:http://38.207.179.218:8080}      # 服务器公网访问地址

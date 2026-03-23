@@ -1,0 +1,52 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/index/index",
+    "pages/add-elder/add-elder",
+    "pages/face-search/face-search",
+    "pages/elder-detail/elder-detail",
+    "pages/my-elders/my-elders",
+    "pages/edit-elder/edit-elder"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#FF6B35",
+    "navigationBarTitleText": "守护长者",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#FFF8F5",
+    "enablePullDownRefresh": false
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#FF6B35",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/face-search/face-search",
+        "text": "人脸识别"
+      },
+      {
+        "pagePath": "pages/my-elders/my-elders",
+        "text": "我的老人"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 30000,
+    "uploadFile": 60000,
+    "downloadFile": 30000
+  },
+  "permission": {
+    "scope.camera": {
+      "desc": "用于拍摄老人照片进行人脸识别"
+    }
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents"
+}

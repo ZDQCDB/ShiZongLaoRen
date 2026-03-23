@@ -1,0 +1,107 @@
+<!-- pages/index/index.wxml - 首页 -->
+<view class="page-container">
+
+  <!-- 顶部问候横幅 -->
+  <view class="hero-banner">
+    <view class="hero-content">
+      <view class="hero-left">
+        <text class="hero-greeting">{{greeting}}，{{nickName}}</text>
+        <text class="hero-subtitle">守护老人，从这里开始</text>
+      </view>
+      <view class="hero-avatar" bindtap="onProfileTap">
+        <image
+          wx:if="{{avatarUrl}}"
+          src="{{avatarUrl}}"
+          class="avatar-img"
+          mode="aspectFill"
+        />
+        <view wx:else class="avatar-placeholder">
+          <text>👤</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 紧急提醒横幅（遇到走失老人立即使用）-->
+    <view class="emergency-bar" bindtap="onFaceSearchTap">
+      <text class="emergency-icon">🚨</text>
+      <text class="emergency-text">遇到走失老人？点此立即识别</text>
+      <text class="emergency-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 主要功能卡片 -->
+  <view class="page-content">
+
+    <!-- 两大核心功能 -->
+    <view class="func-grid">
+      <!-- 人脸识别 -->
+      <view class="func-card func-search" bindtap="onFaceSearchTap">
+        <view class="func-icon-wrap func-icon-orange">
+          <text class="func-icon">🔍</text>
+        </view>
+        <text class="func-title">人脸识别寻人</text>
+        <text class="func-desc">拍照识别老人身份\n快速找到家属联系方式</text>
+      </view>
+
+      <!-- 添加老人 -->
+      <view class="func-card func-add" bindtap="onAddElderTap">
+        <view class="func-icon-wrap func-icon-blue">
+          <text class="func-icon">➕</text>
+        </view>
+        <text class="func-title">登记老人信息</text>
+        <text class="func-desc">录入老人资料\n一旦走失可快速找到</text>
+      </view>
+    </view>
+
+    <!-- 快速操作 -->
+    <view class="quick-list card">
+      <text class="card-title">快捷操作</text>
+
+      <view class="quick-item" bindtap="onMyEldersTap">
+        <view class="quick-left">
+          <text class="quick-icon">👴</text>
+          <text class="quick-text">我登记的老人</text>
+        </view>
+        <text class="quick-arrow">›</text>
+      </view>
+
+      <view class="quick-item" bindtap="onFaceSearchTap">
+        <view class="quick-left">
+          <text class="quick-icon">📸</text>
+          <text class="quick-text">拍照识别老人</text>
+        </view>
+        <text class="quick-arrow">›</text>
+      </view>
+
+      <view class="quick-item" bindtap="onHelpTap">
+        <view class="quick-left">
+          <text class="quick-icon">❓</text>
+          <text class="quick-text">使用帮助</text>
+        </view>
+        <text class="quick-arrow">›</text>
+      </view>
+    </view>
+
+    <!-- 使用提示 -->
+    <view class="tips-card card">
+      <text class="card-title">使用提示</text>
+      <view class="tip-item">
+        <text class="tip-num">1</text>
+        <text class="tip-text">家属提前登记老人照片和联系方式</text>
+      </view>
+      <view class="tip-item">
+        <text class="tip-num">2</text>
+        <text class="tip-text">遇到走失老人，任何人拍照上传即可识别</text>
+      </view>
+      <view class="tip-item">
+        <text class="tip-num">3</text>
+        <text class="tip-text">系统自动匹配并显示家属联系方式</text>
+      </view>
+      <view class="tip-item">
+        <text class="tip-num">4</text>
+        <text class="tip-text">一键拨打紧急联系电话，快速联系家属</text>
+      </view>
+    </view>
+
+  </view>
+</view>

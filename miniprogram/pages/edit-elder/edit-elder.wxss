@@ -1,0 +1,72 @@
+/* pages/edit-elder/edit-elder.wxss */
+@import "../add-elder/add-elder.wxss";
+
+/* ===== 只读照片区域（编辑页专有） ===== */
+.card-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16rpx;
+}
+
+.photo-lock-tip {
+  font-size: 22rpx;
+  color: #AAAAAA;
+  background: #F5F5F5;
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+.photo-preview-wrap {
+  position: relative;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.photo-preview {
+  width: 100%;
+  height: 360rpx;
+  display: block;
+}
+
+.photo-count-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #FFFFFF;
+  font-size: 22rpx;
+  text-align: center;
+  padding: 10rpx;
+}
+
+.no-photo-tip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40rpx 32rpx;
+  background: #F9F9F9;
+  border-radius: 12rpx;
+}
+
+.no-photo-icon {
+  font-size: 64rpx;
+  margin-bottom: 12rpx;
+}
+
+.no-photo-sub {
+  font-size: 22rpx;
+  color: #AAAAAA;
+  margin-top: 8rpx;
+}
+
+/* 底部提示 */
+.edit-tip {
+  text-align: center;
+  font-size: 22rpx;
+  color: #AAAAAA;
+  margin-top: 8rpx;
+  margin-bottom: 48rpx;
+  padding: 0 32rpx;
+}

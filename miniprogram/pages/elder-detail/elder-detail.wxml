@@ -1,0 +1,115 @@
+<!-- pages/elder-detail/elder-detail.wxml - 老人详情页 -->
+<view class="page-container" wx:if="{{elderly}}">
+
+  <!-- 顶部大照片区域 -->
+  <view class="detail-hero">
+    <view class="detail-photo-wrap">
+      <view class="detail-photo-placeholder">
+        <text class="detail-photo-icon">{{elderly.emojiAvatar}}</text>
+      </view>
+    </view>
+    <view class="detail-name-row">
+      <text class="detail-name">{{elderly.name}}</text>
+      <view class="detail-gender-badge {{elderly.gender === '女' ? 'badge-female' : 'badge-male'}}">
+        {{elderly.gender}}
+      </view>
+    </view>
+    <text class="detail-age">{{elderly.age ? elderly.age + '岁' : '年龄未知'}}</text>
+    <!-- 人脸照片注册数量 -->
+    <view class="face-count-badge {{elderly.photoCount > 0 ? 'face-count-ok' : 'face-count-none'}}">
+      <text>{{elderly.photoCount > 0 ? '📸 已注册 ' + elderly.photoCount + ' 张人脸' : '⚠️ 未注册人脸照片'}}</text>
+    </view>
+  </view>
+
+  <view class="page-content">
+
+    <!-- 紧急联系 - 最重要，放最顶部 -->
+    <view class="emergency-contact-card card">
+      <view class="ec-header">
+        <text class="ec-icon">🚨</text>
+        <text class="ec-title">紧急联系方式</text>
+      </view>
+      <view class="ec-person">
+        <text class="ec-name">{{elderly.contactName || '家属'}}
+          <text class="ec-relation">（{{elderly.relation || '联系人'}}）</text>
+        </text>
+      </view>
+      <text class="ec-phone">{{elderly.contactPhone}}</text>
+
+      <button
+        class="btn btn-primary btn-block call-btn"
+        bindtap="onCallPhone"
+      >
+        📞 立即拨打
+      </button>
+    </view>
+
+    <!-- 基本信息 -->
+    <view class="card">
+      <text class="card-title">基本信息</text>
+
+      <view class="info-row">
+        <text class="info-label">姓名</text>
+        <text class="info-value text-bold">{{elderly.name}}</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">性别</text>
+        <text class="info-value">{{elderly.gender}}</text>
+      </view>
+      <view wx:if="{{elderly.age}}" class="info-row">
+        <text class="info-label">年龄</text>
+        <text class="info-value">{{elderly.age}}岁</text>
+      </view>
+      <view wx:if="{{elderly.idCard}}" class="info-row">
+        <text class="info-label">身份证</text>
+        <text class="info-value">{{elderly.idCard}}</text>
+      </view>
+    </view>
+
+    <!-- 居住信息 -->
+    <view class="card">
+      <text class="card-title">居住信息</text>
+
+      <view class="info-row">
+        <text class="info-label">家庭住址</text>
+        <text class="info-value">{{elderly.address}}</text>
+      </view>
+      <view wx:if="{{elderly.features}}" class="info-row">
+        <text class="info-label">外貌特征</text>
+        <text class="info-value">{{elderly.features}}</text>
+      </view>
+    </view>
+
+    <!-- 健康状况（如果有）-->
+    <view wx:if="{{elderly.medicalHistory}}" class="card">
+      <text class="card-title">健康状况</text>
+      <view class="health-content">
+        <text class="health-icon">⚕️</text>
+        <text class="health-text">{{elderly.medicalHistory}}</text>
+      </view>
+    </view>
+
+    <!-- 备注信息 -->
+    <view wx:if="{{elderly.additionalInfo}}" class="card">
+      <text class="card-title">其他信息</text>
+      <text class="addition-text">{{elderly.additionalInfo}}</text>
+    </view>
+
+    <!-- 底部操作按钮（仅录入人可见）-->
+    <view wx:if="{{isOwner}}" class="action-row">
+      <button class="btn btn-secondary action-btn" bindtap="onEditTap">
+        ✏️ 修改信息
+      </button>
+      <button class="btn btn-danger action-btn" bindtap="onDeleteTap">
+        🗑️ 删除
+      </button>
+    </view>
+
+  </view>
+
+</view>
+
+<!-- 加载中 -->
+<view wx:if="{{loading}}" class="loading-wrap">
+  <text>加载中...</text>
+</view>

@@ -1,0 +1,66 @@
+<!-- pages/login/login.wxml - 登录页 -->
+<view class="login-page">
+  <!-- 顶部波浪背景 -->
+  <view class="login-header">
+    <view class="logo-wrap">
+      <text class="logo-icon">👴</text>
+    </view>
+    <text class="app-name">守护长者</text>
+    <text class="app-slogan">让爱不走失，让家人安心</text>
+  </view>
+
+  <!-- 登录卡片 -->
+  <view class="login-card">
+    <view class="card-header">
+      <text class="card-title">欢迎使用</text>
+      <text class="card-subtitle">登录后可添加老人信息，随时保护家人安全</text>
+    </view>
+
+    <!-- 功能介绍 -->
+    <view class="feature-list">
+      <view class="feature-item">
+        <text class="feature-icon">📷</text>
+        <view class="feature-text">
+          <text class="feature-title">人脸识别</text>
+          <text class="feature-desc">快速识别走失老人身份</text>
+        </view>
+      </view>
+      <view class="feature-item">
+        <text class="feature-icon">📋</text>
+        <view class="feature-text">
+          <text class="feature-title">信息登记</text>
+          <text class="feature-desc">录入老人资料便于快速联系</text>
+        </view>
+      </view>
+      <view class="feature-item">
+        <text class="feature-icon">📞</text>
+        <view class="feature-text">
+          <text class="feature-title">紧急联系</text>
+          <text class="feature-desc">一键拨打家属电话</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 微信登录按钮 -->
+    <button
+      class="btn-wechat-login"
+      open-type="getUserInfo"
+      bindgetuserinfo="onGetUserInfo"
+      loading="{{loading}}"
+      disabled="{{loading}}"
+    >
+      <text class="wechat-icon">微信</text>
+      <text>微信一键登录</text>
+    </button>
+
+    <!-- 说明文字 -->
+    <text class="login-tip">登录即代表同意《用户协议》和《隐私政策》</text>
+    <text class="login-tip">老人信息受严格加密保护，请放心使用</text>
+  </view>
+
+  <!-- 底部说明 -->
+  <view class="login-footer">
+    <text class="footer-text">专为寻找失踪老人而设计</text>
+    <text class="footer-text">紧急识别无需登录，直接扫描即可</text>
+  </view>
+</view>
