@@ -1,0 +1,122 @@
+<!-- pages/privacy-policy/privacy-policy.wxml -->
+<scroll-view class="page" scroll-y>
+  <view class="container">
+
+    <view class="header">
+      <text class="title">隐私政策</text>
+      <text class="update-date">更新日期：{{updateDate}}</text>
+    </view>
+
+    <view class="intro-box">
+      <text class="intro-text">回家深知个人信息对您的重要性。本隐私政策依据《中华人民共和国个人信息保护法》《网络安全法》等法律法规制定，详细说明我们如何收集、使用、存储和保护您及老人的个人信息，请您仔细阅读。</text>
+    </view>
+
+    <!-- 一、收集信息 -->
+    <view class="section">
+      <text class="section-title">一、我们收集哪些信息</text>
+      <view class="info-card">
+        <text class="info-card-title">🔑 微信身份信息</text>
+        <text class="info-card-body">OpenID（微信账号的唯一标识符，不含真实姓名、手机号等敏感信息）、您授权提供的昵称和头像</text>
+        <text class="info-card-purpose">用途：用于账号注册与身份识别</text>
+      </view>
+      <view class="info-card">
+        <text class="info-card-title">👴 老人信息（您主动填写）</text>
+        <text class="info-card-body">老人姓名、年龄、联系电话、家庭住址、体貌特征描述、老人照片（最多5张）</text>
+        <text class="info-card-purpose">用途：用于寻人信息展示和人脸识别比对</text>
+      </view>
+      <view class="info-card">
+        <text class="info-card-title">📷 人脸特征数据</text>
+        <text class="info-card-body">上传的老人照片经阿里云人脸识别服务提取为特征向量，存入人脸库</text>
+        <text class="info-card-purpose">用途：仅用于人脸比对，照片特征向量不可逆还原为照片</text>
+      </view>
+      <view class="info-card">
+        <text class="info-card-title">📋 设备与日志信息</text>
+        <text class="info-card-body">操作日志、错误日志等系统运行信息</text>
+        <text class="info-card-purpose">用途：用于系统维护和问题排查，不用于个人画像</text>
+      </view>
+    </view>
+
+    <!-- 二、不收集的信息 -->
+    <view class="section highlight-section">
+      <text class="section-title">二、我们不会收集的信息</text>
+      <text class="section-body">• 您的真实姓名（除非您在老人信息中填写联系人）</text>
+      <text class="section-body">• 您的手机号、身份证号等敏感个人信息</text>
+      <text class="section-body">• 您的精确地理位置</text>
+      <text class="section-body">• 微信的 session_key 或 unionid（我们的程序不读取此信息）</text>
+    </view>
+
+    <!-- 三、信息使用 -->
+    <view class="section">
+      <text class="section-title">三、我们如何使用信息</text>
+      <text class="section-body">3.1 提供核心服务：展示老人寻人信息、进行人脸比对识别。</text>
+      <text class="section-body">3.2 保障账号安全：通过OpenID识别您的身份，保护您的数据不被他人修改。</text>
+      <text class="section-body">3.3 改善产品体验：分析系统日志以优化功能，所有分析均为匿名处理。</text>
+      <text class="section-body">3.4 我们承诺：不会将您的信息用于商业广告投放或用户画像。</text>
+    </view>
+
+    <!-- 四、信息存储 -->
+    <view class="section">
+      <text class="section-title">四、信息存储与安全</text>
+      <text class="section-body">4.1 <text class="bold">存储位置：</text>您的账号信息和老人信息存储于我们位于中国境内的云服务器（阿里云）。</text>
+      <text class="section-body">4.2 <text class="bold">登录凭证：</text>JWT登录令牌仅存储在您的手机本地，服务器不保存您的登录状态。</text>
+      <text class="section-body">4.3 <text class="bold">人脸数据：</text>老人照片及人脸特征向量存储于阿里云人脸识别服务，采用加密传输和存储。</text>
+      <text class="section-body">4.4 <text class="bold">保存期限：</text>您的信息在您主动删除前持续保存。若您注销账号，我们将在30天内删除您的全部数据。</text>
+      <text class="section-body">4.5 <text class="bold">安全措施：</text>我们采用HTTPS加密传输、数据库访问控制等安全手段保护您的数据。</text>
+    </view>
+
+    <!-- 五、信息共享 -->
+    <view class="section">
+      <text class="section-title">五、信息共享与公开</text>
+      <text class="section-body">5.1 <text class="bold">公开展示：</text>您登记的老人寻人信息（姓名、照片、联系方式、特征描述）将公开展示，供路人、警察等通过扫描功能查看，这是本平台寻人功能的核心机制，您登记前已了解并同意。</text>
+      <text class="section-body">5.2 <text class="bold">第三方服务：</text>我们使用阿里云人脸识别API处理照片，阿里云受其自身隐私政策约束，我们不会将数据用于其他目的。</text>
+      <text class="section-body">5.3 <text class="bold">不出售数据：</text>我们永不出售、租赁您的个人信息给任何第三方。</text>
+      <text class="section-body">5.4 <text class="bold">法律要求：</text>在法律法规要求或司法机关依法要求时，我们可能依法提供相关信息。</text>
+    </view>
+
+    <!-- 六、用户权利 -->
+    <view class="section">
+      <text class="section-title">六、您的权利</text>
+      <text class="section-body">依据《个人信息保护法》，您享有以下权利：</text>
+      <text class="section-body">6.1 <text class="bold">知情权：</text>了解我们收集和使用您信息的方式（即本政策）。</text>
+      <text class="section-body">6.2 <text class="bold">访问权：</text>查看您在本平台登记的全部老人信息。</text>
+      <text class="section-body">6.3 <text class="bold">更正权：</text>修改不准确的老人信息。</text>
+      <text class="section-body">6.4 <text class="bold">删除权：</text>删除您登记的老人信息，一经删除不可恢复。</text>
+      <text class="section-body">6.5 <text class="bold">撤回同意：</text>停止使用本服务并清除本地存储，即可撤回对本政策的授权。</text>
+    </view>
+
+    <!-- 七、人脸信息特别说明 -->
+    <view class="section special-section">
+      <text class="section-title">七、人脸信息特别说明</text>
+      <text class="section-body">人脸信息属于敏感个人信息，我们特别说明：</text>
+      <text class="section-body">• 上传的老人照片仅用于人脸识别比对，帮助寻找走失老人；</text>
+      <text class="section-body">• 人脸特征数据采用阿里云加密存储，不会泄露给无关方；</text>
+      <text class="section-body">• 删除老人信息时，对应的人脸特征数据同步从人脸库中删除；</text>
+      <text class="section-body">• 路人/警察进行人脸扫描时，仅返回匹配的老人基本信息，不展示技术参数。</text>
+    </view>
+
+    <!-- 八、未成年人 -->
+    <view class="section">
+      <text class="section-title">八、未成年人保护</text>
+      <text class="section-body">本服务面向成年用户。若未成年人需要使用本服务，须在监护人指导和同意下进行，监护人应承担监督责任。</text>
+    </view>
+
+    <!-- 九、政策更新 -->
+    <view class="section">
+      <text class="section-title">九、隐私政策更新</text>
+      <text class="section-body">我们可能不定期更新本政策。更新后将在小程序内公告，重大变更将通过弹窗提醒。继续使用本服务即表示您同意更新后的政策。</text>
+    </view>
+
+    <!-- 十、联系我们 -->
+    <view class="section">
+      <text class="section-title">十、联系我们</text>
+      <text class="section-body">如您对本隐私政策或个人信息处理有任何疑问、投诉或建议，请通过以下方式联系：</text>
+      <text class="section-body contact-item">📧 邮件：通过小程序反馈功能联系开发者</text>
+      <text class="section-body contact-item">⏰ 响应时间：我们将在15个工作日内回复</text>
+    </view>
+
+    <view class="footer-tip">
+      <text>本政策自{{updateDate}}起生效</text>
+    </view>
+
+  </view>
+</scroll-view>

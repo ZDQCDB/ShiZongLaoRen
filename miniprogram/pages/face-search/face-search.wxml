@@ -5,20 +5,20 @@
   <view class="search-header">
     <text class="header-icon">🔍</text>
     <text class="header-title">人脸识别寻人</text>
-    <text class="header-desc">拍摄走失老人的照片\n系统将自动匹配并显示联系方式</text>
+    <text class="header-desc">拍摄走失人员的照片\n系统将自动匹配并显示联系方式</text>
   </view>
 
   <view class="page-content">
 
     <!-- 照片上传区域 -->
     <view class="upload-card card">
-      <text class="card-title">拍摄老人照片</text>
+      <text class="card-title">拍摄照片</text>
 
       <!-- 未拍照时显示拍照区域 -->
       <view wx:if="{{!photoPath}}" class="upload-area" bindtap="onChoosePhoto">
         <text class="upload-icon">📷</text>
         <text class="upload-text">点击拍照</text>
-        <text class="upload-hint">请对准老人面部，拍摄清晰正面照</text>
+        <text class="upload-hint">请对准走失人员面部，拍摄清晰正面照</text>
       </view>
 
       <!-- 已拍照时显示预览 -->

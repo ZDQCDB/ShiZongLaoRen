@@ -46,5 +46,13 @@ Page({
    */
   onSkipToSearch() {
     wx.navigateTo({ url: '/pages/face-search/face-search' });
+  },
+
+  onTapAgreement() {
+    wx.navigateTo({ url: '/pages/user-agreement/user-agreement' });
+  },
+
+  onTapPrivacy() {
+    wx.navigateTo({ url: '/pages/privacy-policy/privacy-policy' });
   }
 });

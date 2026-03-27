@@ -1,4 +1,4 @@
-<!-- pages/add-elder/add-elder.wxml - 添加老人信息页 -->
+<!-- pages/add-elder/add-elder.wxml - 添加家人信息页 -->
 <view class="page-container">
   <view class="page-content">
 
@@ -54,12 +54,12 @@
 
       <view class="form-group">
         <view class="form-label">
-          <text>老人姓名</text>
+          <text>家人姓名</text>
           <text class="required">*</text>
         </view>
         <input
           class="form-input"
-          placeholder="请输入老人真实姓名"
+          placeholder="请输入家人真实姓名"
           value="{{form.name}}"
           bindinput="onInput"
           data-field="name"
@@ -123,7 +123,7 @@
         </view>
         <textarea
           class="form-textarea"
-          placeholder="请输入老人常住地址（详细地址有助于快速送回）"
+          placeholder="请输入家人常住地址（详细地址有助于快速送回）"
           value="{{form.address}}"
           bindinput="onInput"
           data-field="address"
@@ -178,7 +178,7 @@
       </view>
 
       <view class="form-group">
-        <view class="form-label"><text>与老人关系</text></view>
+        <view class="form-label"><text>与家人关系</text></view>
         <view class="relation-wrap">
           <view
             wx:for="{{relations}}"
@@ -229,11 +229,11 @@
       loading="{{submitting}}"
       disabled="{{submitting || uploadingPhotos}}"
     >
-      {{submitting ? (uploadProgress || '保存中...') : '保存老人信息'}}
+      {{submitting ? (uploadProgress || '保存中...') : '保存家人信息'}}
     </button>
 
     <view class="bottom-note">
-      <text>🔒 老人信息受严格保护，照片仅用于寻找走失老人</text>
+      <text>🔒 家人信息受严格保护，照片仅用于寻找走失人员</text>
     </view>
   </view>
 </view>

@@ -1,9 +1,9 @@
 {
   "appid": "wx81abeea024268fb7",
-  "projectname": "守护长者-寻找失踪老人",
+  "projectname": "回家-寻找失踪老人",
   "description": "帮助寻找走失老人的微信小程序",
   "compileType": "miniprogram",
-  "libVersion": "3.4.0",
+  "libVersion": "3.15.0",
   "setting": {
     "urlCheck": true,
     "es6": true,
@@ -47,7 +47,12 @@
   "simulatorPluginLibVersion": {},
   "condition": {},
   "packOptions": {
-    "ignore": [],
+    "ignore": [
+      {
+        "value": "/minitest",
+        "type": "folder"
+      }
+    ],
     "include": []
   },
   "editorSetting": {}

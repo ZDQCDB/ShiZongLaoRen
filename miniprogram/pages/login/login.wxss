@@ -147,6 +147,28 @@
 }
 
 /* ===== 提示文字 ===== */
+.login-tip-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 4rpx;
+}
+
+.login-tip-text {
+  font-size: 22rpx;
+  color: #AAAAAA;
+  line-height: 1.6;
+}
+
+.link-text {
+  font-size: 22rpx;
+  color: #FF6B35;
+  line-height: 1.6;
+  text-decoration: underline;
+}
+
 .login-tip {
   display: block;
   font-size: 22rpx;

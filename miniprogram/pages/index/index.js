@@ -106,8 +106,7 @@ Page({
               success: (r) => {
                 if (r.confirm) {
                   app.clearLoginState();
-                  this.setData({ nickName: '朋友', avatarUrl: '', elderlyCount: 0, faceCount: 0 });
-                  wx.showToast({ title: '已退出登录', icon: 'success' });
+                  app.navigateToLogin();
                 }
               }
             });

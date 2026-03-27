@@ -5,7 +5,7 @@
     <view class="logo-wrap">
       <text class="logo-icon">👴</text>
     </view>
-    <text class="app-name">守护长者</text>
+    <text class="app-name">回家</text>
     <text class="app-slogan">让爱不走失，让家人安心</text>
   </view>
 
@@ -54,7 +54,12 @@
     </button>
 
     <!-- 说明文字 -->
-    <text class="login-tip">登录即代表同意《用户协议》和《隐私政策》</text>
+    <view class="login-tip-row">
+      <text class="login-tip-text">登录即代表同意</text>
+      <text class="link-text" bindtap="onTapAgreement">《用户协议》</text>
+      <text class="login-tip-text">和</text>
+      <text class="link-text" bindtap="onTapPrivacy">《隐私政策》</text>
+    </view>
     <text class="login-tip">老人信息受严格加密保护，请放心使用</text>
   </view>
 

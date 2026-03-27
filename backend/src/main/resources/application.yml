@@ -50,13 +50,20 @@ wechat:
   app-id: ${WECHAT_APP_ID:wx81abeea024268fb7}
   app-secret: ${WECHAT_APP_SECRET:5d096f6dfd757dd708816e3166f12c43}
   code2session-url: https://api.weixin.qq.com/sns/jscode2session
-
+# =============================================
+# DeepSeek AI 配置（中医问诊功能）
+# 前往 https://platform.deepseek.com 注册获取 API Key
+# =============================================
+deepseek:
+  api-key: ${DEEPSEEK_API_KEY:sk-ef1d767d03cb4dbca8074dcd95a6cf84}
+  api-url: https://api.deepseek.com/chat/completions
+  model: deepseek-chat
 # =============================================
 # JWT配置
 # =============================================
 jwt:
   secret: ${JWT_SECRET:ShiZongLaoRenSecretKey2024XYZ!@#ABCDEabcde}  # 至少32位
-  expiration: 604800  # 7天（单位：秒）
+  expiration: 31536000  # 1年（单位：秒），登录一次永久有效
 
 # =============================================
 # 阿里云配置

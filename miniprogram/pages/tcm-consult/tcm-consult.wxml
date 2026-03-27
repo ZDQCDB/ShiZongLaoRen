@@ -1,0 +1,129 @@
+<!-- pages/tcm-consult/tcm-consult.wxml -->
+<view class="page">
+
+  <!-- 顶部：人群切换 + 工具栏 -->
+  <view class="top-bar">
+    <view class="type-switch">
+      <view
+        class="type-btn {{userType === 'elder' ? 'type-btn-active' : ''}}"
+        bindtap="onSwitchUserType"
+        data-type="elder"
+      >👴 老人</view>
+      <view
+        class="type-btn {{userType === 'child' ? 'type-btn-active' : ''}}"
+        bindtap="onSwitchUserType"
+        data-type="child"
+      >👶 小孩</view>
+    </view>
+    <view class="toolbar">
+      <text class="toolbar-btn" bindtap="onShowHistory">历史</text>
+      <text class="toolbar-btn" bindtap="onClearChat">清空</text>
+    </view>
+  </view>
+
+  <!-- 免责声明条 -->
+  <view class="disclaimer">
+    <text class="disclaimer-text">⚠️ 建议仅供健康科普参考，不替代正规医疗诊断，症状严重请及时就医</text>
+  </view>
+
+  <!-- 聊天区域 -->
+  <scroll-view
+    class="chat-area"
+    scroll-y
+    scroll-top="{{scrollTop}}"
+    scroll-with-animation
+  >
+    <view class="chat-inner">
+      <block wx:for="{{messages}}" wx:key="id">
+
+        <!-- AI 消息（左侧） -->
+        <view wx:if="{{item.role === 'ai'}}" class="msg-row msg-row-ai">
+          <view class="avatar avatar-ai">🌿</view>
+          <view class="bubble bubble-ai">
+            <text class="bubble-text" selectable>{{item.text}}</text>
+          </view>
+        </view>
+
+        <!-- 用户消息（右侧） -->
+        <view wx:if="{{item.role === 'user'}}" class="msg-row msg-row-user">
+          <view class="bubble bubble-user">
+            <text class="bubble-text">{{item.text}}</text>
+          </view>
+          <view class="avatar avatar-user">👤</view>
+        </view>
+
+      </block>
+
+      <!-- 加载动画 -->
+      <view wx:if="{{loading}}" class="loading-dots">
+        <view class="dot dot1"></view>
+        <view class="dot dot2"></view>
+        <view class="dot dot3"></view>
+      </view>
+
+    </view>
+  </scroll-view>
+
+  <!-- 快捷症状标签 -->
+  <scroll-view class="tags-bar" scroll-x>
+    <view class="tags-inner">
+      <view
+        wx:for="{{quickTags}}"
+        wx:key="*this"
+        class="tag"
+        bindtap="onTapTag"
+        data-tag="{{item}}"
+      >{{item}}</view>
+    </view>
+  </scroll-view>
+
+  <!-- 输入区域 -->
+  <view class="input-bar">
+    <input
+      class="input"
+      value="{{inputValue}}"
+      bindinput="onInput"
+      placeholder="描述症状，如：反复咳嗽、夜间盗汗..."
+      confirm-type="send"
+      bindconfirm="onSend"
+      maxlength="300"
+      adjust-position
+    />
+    <view
+      class="send-btn {{(inputValue && !loading) ? 'send-btn-active' : 'send-btn-disabled'}}"
+      bindtap="onSend"
+    >
+      <text>发送</text>
+    </view>
+  </view>
+
+  <!-- 历史记录弹层 -->
+  <view wx:if="{{showHistory}}" class="history-mask" bindtap="onHideHistory">
+    <view class="history-panel" catchtap="">
+      <view class="history-header">
+        <text class="history-title">问诊历史</text>
+        <text class="history-close" bindtap="onHideHistory">✕</text>
+      </view>
+      <scroll-view class="history-list" scroll-y>
+        <view wx:if="{{historyList.length === 0}}" class="history-empty">
+          <text>暂无问诊记录</text>
+        </view>
+        <view
+          wx:for="{{historyList}}"
+          wx:key="id"
+          class="history-item"
+          bindtap="onTapHistory"
+          data-item="{{item}}"
+        >
+          <view class="history-item-top">
+            <text class="history-tag">{{item.userType === 'elder' ? '👴老人' : '👶小孩'}}</text>
+            <text class="history-time">{{item.createdAt}}</text>
+          </view>
+          <text class="history-symptom">{{item.symptom}}</text>
+          <text class="history-advice-preview">{{item.advice}}</text>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+
+</view>

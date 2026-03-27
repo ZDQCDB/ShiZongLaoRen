@@ -6,12 +6,15 @@
     "pages/face-search/face-search",
     "pages/elder-detail/elder-detail",
     "pages/my-elders/my-elders",
-    "pages/edit-elder/edit-elder"
+    "pages/edit-elder/edit-elder",
+    "pages/user-agreement/user-agreement",
+    "pages/privacy-policy/privacy-policy",
+    "pages/tcm-consult/tcm-consult"
   ],
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#FF6B35",
-    "navigationBarTitleText": "守护长者",
+    "navigationBarTitleText": "回家",
     "navigationBarTextStyle": "white",
     "backgroundColor": "#FFF8F5",
     "enablePullDownRefresh": false
@@ -32,12 +35,16 @@
       },
       {
         "pagePath": "pages/my-elders/my-elders",
-        "text": "我的老人"
+        "text": "我的家人"
+      },
+      {
+        "pagePath": "pages/tcm-consult/tcm-consult",
+        "text": "中医问诊"
       }
     ]
   },
   "networkTimeout": {
-    "request": 30000,
+    "request": 60000,
     "uploadFile": 60000,
     "downloadFile": 30000
   },

@@ -4,15 +4,19 @@ E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\config\WebConfig.java
 E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\controller\ElderlyController.java
 E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\controller\FaceController.java
 E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\controller\FileController.java
+E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\controller\TcmController.java
 E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\controller\UserController.java
 E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\dto\ApiResponse.java
 E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\dto\ElderlyDTO.java
 E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\dto\FaceSearchResult.java
 E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\dto\LoginRequest.java
 E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\dto\LoginResponse.java
+E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\dto\TcmConsultRequest.java
+E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\dto\TcmConsultResponse.java
 E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\entity\Elderly.java
 E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\entity\ElderlyFaceToken.java
 E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\entity\FaceSearchLog.java
+E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\entity\TcmRecord.java
 E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\entity\User.java
 E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\exception\BusinessException.java
 E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\exception\GlobalExceptionHandler.java
@@ -20,6 +24,7 @@ E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\interceptor\AuthInterce
 E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\repository\ElderlyFaceTokenRepository.java
 E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\repository\ElderlyRepository.java
 E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\repository\FaceSearchLogRepository.java
+E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\repository\TcmRecordRepository.java
 E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\repository\UserRepository.java
 E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\service\ElderlyService.java
 E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\service\FaceRecognitionService.java
@@ -27,7 +32,9 @@ E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\service\FileService.jav
 E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\service\impl\ElderlyServiceImpl.java
 E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\service\impl\FaceRecognitionServiceImpl.java
 E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\service\impl\FileServiceImpl.java
+E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\service\impl\TcmServiceImpl.java
 E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\service\impl\UserServiceImpl.java
+E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\service\TcmService.java
 E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\service\UserService.java
 E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\ShiZongLaoRenApplication.java
 E:\ShiZongLaoRen\backend\src\main\java\com\shizonglaoren\util\ElderlyMapper.java

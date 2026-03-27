@@ -88,7 +88,7 @@ Page({
     if (!checkLogin()) return;
     const { name, address, contactPhone } = this.data.form;
     if (!name.trim()) {
-      wx.showToast({ title: '请填写老人姓名', icon: 'none' });
+      wx.showToast({ title: '请填写家人姓名', icon: 'none' });
       return;
     }
     if (!address.trim()) {

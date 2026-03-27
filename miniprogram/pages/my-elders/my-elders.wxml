@@ -1,10 +1,10 @@
-<!-- pages/my-elders/my-elders.wxml - 我的老人列表 -->
+<!-- pages/my-elders/my-elders.wxml - 我的家人列表 -->
 <view class="page-container">
 
   <!-- 顶部统计 -->
   <view class="list-header">
     <view class="list-header-content">
-      <text class="list-title">我登记的老人</text>
+      <text class="list-title">我的家人</text>
       <text class="list-count">共 {{list.length}} 位</text>
     </view>
     <view class="add-btn" bindtap="onAddElder">
@@ -19,8 +19,8 @@
     <!-- 空状态 -->
     <view wx:if="{{!loading && list.length === 0}}" class="empty-state">
       <text class="empty-icon">👴</text>
-      <text class="empty-text">还没有登记老人信息</text>
-      <text class="empty-hint">添加老人资料，守护家人安全</text>
+      <text class="empty-text">还没有登记家人信息</text>
+      <text class="empty-hint">添加资料，守护家人安全</text>
       <button class="btn btn-primary empty-add-btn" bindtap="onAddElder">
         立即添加
       </button>

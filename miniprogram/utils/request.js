@@ -3,11 +3,9 @@
 const app = getApp();
 
 /**
- * 封装 wx.request，自动附带 token，统一处理错误
- * @param {Object} options - 请求配置
- * @returns {Promise}
+ * 发送底层请求（不含401重试逻辑）
  */
-function request(options) {
+function rawRequest(options, token) {
   return new Promise((resolve, reject) => {
     const { url, method = 'GET', data, header = {}, showLoading = false } = options;
 
@@ -15,58 +13,86 @@ function request(options) {
       wx.showLoading({ title: '请稍候...', mask: true });
     }
 
-    // 自动附加 Authorization 头
-    const token = app.globalData.token;
+    const reqHeader = { ...header };
     if (token) {
-      header['Authorization'] = `Bearer ${token}`;
+      reqHeader['Authorization'] = `Bearer ${token}`;
     }
-    header['Content-Type'] = header['Content-Type'] || 'application/json';
+    reqHeader['Content-Type'] = reqHeader['Content-Type'] || 'application/json';
 
     wx.request({
       url: app.globalData.baseUrl + url,
       method,
       data,
-      header,
+      header: reqHeader,
       timeout: 30000,
       success: (res) => {
         if (showLoading) wx.hideLoading();
-
-        const { statusCode, data: resData } = res;
-
-        if (statusCode === 401) {
-          // Token 过期，跳转登录
-          app.clearLoginState();
-          wx.showToast({ title: '登录已过期，请重新登录', icon: 'none', duration: 2000 });
-          setTimeout(() => app.navigateToLogin(), 1500);
-          reject(new Error('未授权'));
-          return;
-        }
-
-        if (statusCode !== 200) {
-          const msg = resData?.message || `请求失败(${statusCode})`;
-          wx.showToast({ title: msg, icon: 'none' });
-          reject(new Error(msg));
-          return;
-        }
-
-        if (resData.code !== 200) {
-          const msg = resData.message || '操作失败';
-          wx.showToast({ title: msg, icon: 'none' });
-          reject(new Error(msg));
-          return;
-        }
-
-        resolve(resData.data);
+        resolve(res);
       },
       fail: (err) => {
         if (showLoading) wx.hideLoading();
-        console.error('网络请求失败:', err);
-        const msg = err.errMsg?.includes('timeout') ? '请求超时，请检查网络' : '网络连接失败';
-        wx.showToast({ title: msg, icon: 'none' });
         reject(err);
       }
     });
   });
+}
+
+/**
+ * 封装 wx.request，自动附带 token，统一处理错误
+ * 遇到 401 时先尝试静默刷新 token，刷新成功则重试请求，失败才跳登录页
+ * @param {Object} options - 请求配置
+ * @param {boolean} isRetry - 是否是重试请求（防止死循环）
+ * @returns {Promise}
+ */
+async function request(options, isRetry = false) {
+  const token = app.globalData.token;
+
+  let res;
+  try {
+    res = await rawRequest(options, token);
+  } catch (err) {
+    console.error('网络请求失败:', err);
+    const msg = err.errMsg?.includes('timeout') ? '请求超时，请检查网络' : '网络连接失败';
+    wx.showToast({ title: msg, icon: 'none' });
+    throw err;
+  }
+
+  const { statusCode, data: resData } = res;
+
+  if (statusCode === 401 && !isRetry) {
+    // Token 过期，先尝试静默刷新（用户无感知）
+    const refreshed = await app.silentRefreshToken();
+    if (refreshed) {
+      // 刷新成功，用新 token 重试请求
+      return request(options, true);
+    }
+    // 静默刷新失败（彻底无法登录），才清除状态并跳转
+    app.clearLoginState();
+    wx.showToast({ title: '登录信息已失效，请重新登录', icon: 'none', duration: 2000 });
+    setTimeout(() => app.navigateToLogin(), 1500);
+    throw new Error('未授权');
+  }
+
+  if (statusCode === 401 && isRetry) {
+    app.clearLoginState();
+    wx.showToast({ title: '登录信息已失效，请重新登录', icon: 'none', duration: 2000 });
+    setTimeout(() => app.navigateToLogin(), 1500);
+    throw new Error('未授权');
+  }
+
+  if (statusCode !== 200) {
+    const msg = resData?.message || `请求失败(${statusCode})`;
+    wx.showToast({ title: msg, icon: 'none' });
+    throw new Error(msg);
+  }
+
+  if (resData.code !== 200) {
+    const msg = resData.message || '操作失败';
+    wx.showToast({ title: msg, icon: 'none' });
+    throw new Error(msg);
+  }
+
+  return resData.data;
 }
 
 /**
